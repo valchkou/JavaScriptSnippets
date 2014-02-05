@@ -3,10 +3,15 @@
  * Assign parent instance to the Child.prototype
  * Features:
  * 		Child will inherit both prototype and own properties from the Parent instance.
- * 		If Parent allows parameters in constructor the Child will not pass them.
+ * 		But the Child constructor will not inherit the Parent constructor.
  * 
  */
 (function() {
+	
+	/** inheritance implemented here **/
+	function extend(ChildClass, ParentClass) {
+		ChildClass.prototype = new ParentClass();
+	}
 	
 	/****** Define Parent *****/
 	function Parent(name) {
@@ -21,9 +26,8 @@
 	/****** Define Child *****/
 	function Child(name) {};
 	
-	function extend(ChildClass, ParentClass) {
-		ChildClass.prototype = new ParentClass();
-	}
+	// extend Child
+	extend(Child, Parent);
 	
 	// result
 	var child = new Child();
